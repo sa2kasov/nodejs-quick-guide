@@ -19,3 +19,6 @@
 .nvmrc
 sftp-config.json
 Thumbs.db
+
+# Project files
+/labs/
