@@ -20,11 +20,21 @@ curl [URL]
 
 Отправка POST-данных:
 ```javascript
-curl --data 'данные' [URL]
+// Отправка данных методом POST
+curl -d 'данные' [URL]
+
+// URL-кодирование данных при отправке
 curl --data-urlencode 'данные' [URL]
+
+// Отправка данных формы
 curl --form field=value [URL]
 curl --form field=@filename [URL]
 curl --upload-file filename [URL]
+
+// HTTP-заголовки
+curl --referer [URL]
+curl --user-agent 'name-of-user-agent' [URL]
+curl --cookie 'name=value' [URL]
 ```
 
 ## HTTP-метод POST и способы обработки запроса
