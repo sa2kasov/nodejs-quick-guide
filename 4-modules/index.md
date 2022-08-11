@@ -74,8 +74,8 @@ require('../module')
 require('/a/b/c/module')
 
 require('module-name')
-C:\Users\User\app\node_modules
-C:\Users\User\node_modules
-C:\Users\node_modules
+C:\parent-folder\folder\subfolder\node_modules
+C:\parent-folder\folder\node_modules
+C:\parent-folder\node_modules
 C:\node_modules
 ```

@@ -1,0 +1,19 @@
+{
+  "name": "express.js",
+  "version": "1.0.0",
+  "description": "Node.js web application framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "ejs"
+  ],
+  "author": "User KZ",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
