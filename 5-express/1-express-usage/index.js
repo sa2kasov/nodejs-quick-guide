@@ -1,3 +1,6 @@
+/**
+ * Server with the following features in native Node.js
+ * */
 const url = require('url')
 require('http').createServer((request, response) => {
   let data = ''

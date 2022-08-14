@@ -21,5 +21,6 @@ sftp-config.json
 Thumbs.db
 
 # Project files
-/5-express/node_modules/
 /labs/
+/5-express/node_modules/
+/6-websockets/node_modules/
