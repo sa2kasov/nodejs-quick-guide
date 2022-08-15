@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Client Socket.IO</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<h1>Client Socket.IO</h1>
+<button onclick="getName()">Представиться</button>
+
+<script>
+const socket = io.connect('http://localhost:8080')
+
+// Послать сообщение с клиента на сервер
+socket.emit('message', 'Hello back')
+
+// Обработать событие «message» с сервера
+socket.on('message', msg => {
+  document.body.insertAdjacentHTML('beforeend', `<p>${msg.hello}</p>`)
+})
+
+// Button event handler
+function getName() {
+
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<p>Пользователь №<%= userId%></p>
+
+<dl>
+    <% posts.forEach(post => { %>
+    <dt><%- post.title %></dt>
+    <dd><%- post.body %></dd>
+    <% }) %>
+</dl>
