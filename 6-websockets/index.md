@@ -60,3 +60,31 @@ socket.on('message', msg => {
 socket.emit('message', 'Hello back')
 ```
 
+### Дополнительные манипуляции
+
+**Отправить сообщение всем, кроме текущего сокета**
+
+```javascript
+socket.broadcast.emit('event-name', 'some data')
+```
+
+**Отправка события с сервера на клиент или наоборот**
+```javascript
+io.sockets.emit('event-name', 'some data')
+```
+
+**Использование «переменных» сокета**
+
+```javascript
+io.sockets.on('connection', socket => {
+  socket.nickname = 'some data'
+})
+```
+
+**Событие отсоединения сокета клиента**
+
+```javascript
+socket.on('disconnect', () => io.sockets.emit('event-name', {
+  message: 'пользователь отсоединён'
+}))
+```

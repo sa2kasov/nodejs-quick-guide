@@ -8,21 +8,35 @@
 <body>
 <h1>Client Socket.IO</h1>
 <button onclick="getName()">Представиться</button>
+<button onclick="setName()">Сменить имя</button>
 
 <script>
 const socket = io.connect('http://localhost:8080')
 
-// Послать сообщение с клиента на сервер
-socket.emit('message', 'Hello back')
-
 // Обработать событие «message» с сервера
-socket.on('message', msg => {
-  document.body.insertAdjacentHTML('beforeend', `<p>${msg.hello}</p>`)
+socket.on('greetings', msg => {
+  document.body.insertAdjacentHTML('beforeend', `<p>${msg.text}</p>`)
 })
 
-// Button event handler
+// "Introduce" button event handler
 function getName() {
+  const name = prompt("What's you name", 'Holden')
+  // Послать сообщение с клиента на сервер
+  socket.emit('message', name)
+  // socket.emit('message', `User ${name} has entered the chat...`)
+}
 
+// "Change name" button handler
+function setName() {
+  const name = prompt('Введите новое имя', 'Jake')
+  if (name) {
+    socket.emit('new-message', name)
+  }
+}
+
+// Отправить сигнал об отсоединении при выгрузке страницы
+window.onunload = () => {
+  socket.disconnect()
 }
 </script>
 </body>
