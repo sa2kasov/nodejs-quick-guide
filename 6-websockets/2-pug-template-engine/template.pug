@@ -1,0 +1,42 @@
+doctype
+html
+    head
+        title="Client Socket.IO"
+        script(src="/client.js")
+        script(src="/socket.io/socket.io.js")
+    body
+        h1 Client Socket.IO
+        #controls
+            button(onclick="getName()") Представиться
+            button(onclick="setName()") Сменить имя
+            label#txt(style="display: block") Write a message
+            input#input(style="width: 350px", value="A simple string...")
+            input#submit(type="button", value="Send")
+        script.
+          const socket = io.connect('http://localhost:8080')
+
+          // Обработать событие «write» с сервера
+          socket.on('write', msg => {
+            document.body.insertAdjacentHTML('beforeend', `<p>${msg.text}</p>`)
+          })
+
+          // "Introduce" button event handler
+          function getName() {
+            const name = prompt("What's you name", 'Holden')
+            // Послать сообщение с клиента на сервер
+            socket.emit('message', name)
+            // socket.emit('message', `User ${name} has entered the chat...`)
+          }
+
+          // "Change name" button handler
+          function setName() {
+            const name = prompt('Введите новое имя', 'Jake')
+            if (name) {
+              socket.emit('new-message', name)
+            }
+          }
+
+          // Отправить сигнал об отсоединении при выгрузке страницы
+          window.onunload = () => {
+            socket.disconnect()
+          }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "express": "node 1-express-usage/app.js",
-    "ejs": "node 2-ejs-template/index.js"
+    "ejs": "node 2-ejs-template-engine/index.js"
   },
   "keywords": [
     "node.js",

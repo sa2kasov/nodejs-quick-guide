@@ -88,3 +88,59 @@ socket.on('disconnect', () => io.sockets.emit('event-name', {
   message: 'пользователь отсоединён'
 }))
 ```
+
+## Pug – HTML-шаблонизатор
+
+**Инициализация**
+
+```javascript
+// index.js
+const app = require('express')(),
+      http = require('http').Server(app),
+      io = require('socket.io')(http),
+      express = require('express')
+
+http.listen(8080)
+
+// Указание базовой папки с шаблоном
+app.set('views', __dirname)
+// Установка движка Pug
+app.set('view engine', 'pug')
+app.engine('pug', require('pug').__express)
+// Директория со статическим контентом
+app.use(express.static(__dirname + '/js'))
+
+app.get('/', (request, response) => {
+  // Отобразить шаблон «template.pug»
+  response.render('template')
+})
+```
+
+**Шаблон Pug**
+
+```jade
+doctype
+html
+    head
+        title="Pug template engine"
+        script(src="/client.js")
+        script(src="/socket.io/socket.io.js")
+    body
+        h1 Pug + Socket.IO
+        #controls
+            label#txt(style="display: block") Write a message
+            input#input(style="width: 350px", value="A simple string...")
+            input#submit(type="button", value="Send")
+        script.
+          const socket = io.connect('http://localhost:8080')
+
+          // Обработать событие «write» с сервера
+          socket.on('write', msg => {
+            document.body.insertAdjacentHTML('beforeend', `<p>${msg.text}</p>`)
+          })
+
+          // Отправить сигнал об отсоединении при выгрузке страницы
+          window.onunload = () => {
+            socket.disconnect()
+          }
+```
