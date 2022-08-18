@@ -89,7 +89,7 @@ socket.on('disconnect', () => io.sockets.emit('event-name', {
 }))
 ```
 
-## Pug – HTML-шаблонизатор
+## Pug – HTML шаблонизатор
 
 **Инициализация**
 

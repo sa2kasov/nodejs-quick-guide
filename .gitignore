@@ -23,4 +23,6 @@ Thumbs.db
 # Project files
 /labs/
 /5-express/node_modules/
+/5-express/package-lock.json
 /6-websockets/node_modules/
+/6-websockets/package-lock.json

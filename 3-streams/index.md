@@ -37,7 +37,7 @@ curl --user-agent 'name-of-user-agent' [URL]
 curl --cookie 'name=value' [URL]
 ```
 
-## HTTP-метод POST и способы обработки запроса
+## HTTP метод POST и способы обработки запроса
 
 `console.log()` в Node.js является обёрткой метода `process.stdout.write()`
 

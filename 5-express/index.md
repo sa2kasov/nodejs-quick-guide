@@ -2,15 +2,16 @@
 
 Express — простой, гибкий фреймворк для приложений Node.js, упрощающий разработку веб-приложения, которое может обрабатывать различные типы запросов, например GET, PUT, POST и DELETE.
 
-## Инициализация
+## Инициализация и использование
 
 ```javascript
+// Initialization
 const express= require('express')
 const app = express()
 app.listen(8080)
 ```
 
-## Использование Express
+Метод `app.get` обработает GET-запрос и выдаст в методе `sendFile` указанный ресурс.
 
 ```javascript
 const express = require('express')
