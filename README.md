@@ -37,3 +37,5 @@ Node.js is an open source, cross-platform runtime environment for developing ser
    1. [Socket.io](./6-websockets/index.md#Socket.io)
    2. [PUG Template Engine](./6-websockets/index.md#Pug-–-HTML-шаблонизатор)
 7. [Creating an App](./7-creating-app/index.md)
+   1. [Express application generator](./7-creating-app/index.md#Создание-каркаса-приложения)
+   2. [Middleware](./7-creating-app/index.md#Middleware)
