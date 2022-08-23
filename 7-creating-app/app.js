@@ -9,10 +9,24 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 var conf = require('./bin')
+var log = require('./logs/log')(module)
+
+// winston logging library testing
+app.get('/log', (request, response, next) => {
+  log.info('Hello, World! It is winston!')
+
+  log.log({
+    level: 'info',
+    message: 'Another log entry from winston'
+  });
+
+  response.end('<h1>Log page</h1>')
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, conf.get('app-views')));
 app.set('view engine', conf.get('app-engine'));
+app.engine('ejs', require('ejs-locals'))
 
 app.use(logger(conf.get('log-level')));
 app.use(express.json());
