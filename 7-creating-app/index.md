@@ -1,5 +1,14 @@
 # Создание веб-приложения на Node.js
 
+### Contents
+
+1. [Создание каркаса приложения (express-generator)](#Создание-каркаса-приложения)
+2. [Middleware](#Middleware)
+3. [Конфигурация приложения (nconf)](#Конфигурация-приложения)
+4. [Логирование (winston)](#Логирование)
+5. [Шаблонизация с EJS (ejs-locals)](#Шаблонизация-с-EJS)
+6. [MongoDB](#MongoDB)
+
 ## Создание каркаса приложения
 
 [**Генератор приложений Express**](https://expressjs.com/ru/starter/generator.html) – инструмент командной строки, используется для быстрого создания скелета приложеня Node/Express. Запуск генератора с помощью команды `npx`:
@@ -60,13 +69,13 @@ express.errorHandler()
 
 Хранение входных данных настроек приложения можно вынести в отдельный файл. Модуль [nconf](https://www.npmjs.com/package/nconf) простое хранилище ключей и значений, где ключи разделены пространством имен и символом `:`.
 
-#### Установка
+### Установка
 
 ```bash
 npm install nconf
 ```
 
-#### Инициализация
+### Инициализация
 
 Настройки `nconf` устнавливаются в следующем порядке:
 
@@ -98,7 +107,7 @@ module.exports = nconf
 }
 ```
 
-#### Использование
+### Использование
 
 В переменную `conf` импортируется модуль `index.js` описанный выше.
 
@@ -116,13 +125,13 @@ app.use(express.static(path.join(__dirname, conf.get('app-static'))));
 
 [**winston**](https://github.com/winstonjs/winston#readme) – простая и универсальная библиотека логгирования. Поддерживает несколько способов организации хранения логов: в консоль, в файл или в свой настраеваемый способ, например, в базу данных.
 
-#### Установка
+### Установка
 
 ```bash
 npm install winston
 ```
 
-#### Инициализация
+### Инициализация
 
 ```javascript
 // logger.js
@@ -159,7 +168,7 @@ function logger(module) {
 module.exports = logger
 ```
 
-#### Использование
+### Использование
 
 ```javascript
 const log = require('./path-to/logger')(module)
@@ -174,15 +183,15 @@ log.log({
 
 ## Шаблонизация с EJS
 
-Обычный шаблонизатор EJS к сожалению не поддерживает вложенные шаблоны. Модуль `ejs-locals` имеет те же возможности что и `ejs` с добавлением таких функциональностей как `layout`, `block`, `partial`.
+Обычный шаблонизатор [**EJS**](https://github.com/mde/ejs#readme) к сожалению не поддерживает вложенные шаблоны. Модуль [**ejs-locals**](https://github.com/randometc/ejs-locals#readme) имеет те же возможности что и `ejs` с добавлением таких функциональностей как `layout`, `block`, `partial`.
 
-#### Установка
+### Установка
 
 ```bash
 npm install ejs-locals --save
 ```
 
-#### Инициализация
+### Инициализация
 
 ```javascript
 app.engine('ejs', require('ejs-locals'))
@@ -205,7 +214,7 @@ app.engine('ejs', require('ejs-locals'))
 </html>
 ```
 
-##### • `layout`
+#### • `layout`
 
 В файле `index.ejs` подключается шаблон `main.ejs` с помощью `layout`, а дальнейшее содержимое вставляется вместо `<%- body %>` подключаемого шаблона. Таким образом, `layout` используется для подключения повторяющего шаблона на многих страницах с одинаковым оформлением.
 
@@ -215,7 +224,7 @@ app.engine('ejs', require('ejs-locals'))
 <p>Welcome to <%= title %></p>
 ```
 
-##### • `block(name, html)`
+#### • `block(name, html)`
 
 Именованный блок HTML-кода задаётся в любом месте шаблона.
 
@@ -229,7 +238,7 @@ app.engine('ejs', require('ejs-locals'))
 <%= blocks.header %>
 ```
 
-##### • `script(src, type)` и `stylesheet(href, media)`
+#### • `script(src, type)` и `stylesheet(href, media)`
 
 При вызове в любом месте шаблона добавляет тег `<script>` с заданным `src`/`type` в блок `scripts`. Затем в макете можно выполнить `<%-scripts%>`, чтобы вывести скрипты из всех дочерних шаблонов.
 
@@ -245,11 +254,11 @@ block('stylesheets', '<link rel="stylesheet" href="href.css">')
 <%-stylesheets%>
 ```
 
-##### • `partial(name, optionsOrCollection)`
+#### • `partial(name, optionsOrCollection)`
 
 Функция `partial` добавляет в любом месте макета указанный шаблон с именем `name`, в этот шаблон передаётся текуще указанная коллекция данных (массив) `optionsOrCollection`. В шаблоне она будет доступна под таким же именем `name`. 
 
-###### • `include path/view`
+##### • `include path/view`
 
 Функция `include` поддерживаеся в оригинальном EJS.
 
@@ -257,3 +266,45 @@ block('stylesheets', '<link rel="stylesheet" href="href.css">')
 <% include путь/имя-шаблона %>
 ```
 
+## MongoDB
+
+[**MongoDB**](https://mongodb.com) – бессхемная документо-ориентированная NoSQL-система управления базами данных. Ссылка на [документацию](https://mongodb.com/docs).
+
+### Установка
+
+Установка драйвера mongoDB для Node.js через NPM:
+
+```bash
+npm install mongodb
+```
+
+MongoDB это целая система управления БД, которую нужно установить с [официального сайта](https://www.mongodb.com/try/download) под конкретную операционную систему. Дополнительные инструменты, такие как MongoDB Shell, MongoDB Compass и другие устанавливаются отдельно со [страницы инструментов MongoDB](https://www.mongodb.com/try/download/tools).
+
+### Инструменты MongoDB
+
+* [**MongoDB Shell**](https://www.mongodb.com/try/download/shell) (`mongosh`) – утилита командной строки для быстрого подключения и работы с MongoDB. Пришла на смену устаревшей командной оболочки `mongo` с версии MongoDB v5.0. Инструмент поставляется автономно (_standalone_) отдельно от сервера MongoDB, имеет открытый исходный код и [документацию](https://www.mongodb.com/docs/mongodb-shell/) на оф. сайте;
+* [**MongoDB Compass**](https://www.mongodb.com/try/download/compass) – графический клиент MongoDB для исследования и управления базами данных. Предоставляет возможности по визуализации схем, показатели производительности, возможности запросов и другое;
+* [**The MongoDB Database Tools**](https://www.mongodb.com/try/download/database-tools) – набор утилит командной строки для работы с развертыванием MongoDB (дамп базы, импорт/экспорт, конвертация и пр.). Поставляются отдельно вне зависимости от графика релизов основного сервера MongoDB. Соответствующая [документация по инструментам](https://www.mongodb.com/docs/database-tools/) на официальном сайте.
+
+### Команды в MongoDB Shell (`mongosh`)
+
+• Отобразить используемую базу данных. Команда возвращает `test`, если используется база данных по умолчанию.
+
+    db
+
+• Переключение между базами данных
+
+    use <database>
+
+• Показать доступные базы данных
+
+    show dbs
+
+• Создание новой базы `newDatabase` и коллекции (таблицы) `posts`. Если база уже существует, то система просто переключится на неё.
+
+    use newDatabase
+    db.posts.insertOne( { x: 1 } );
+
+• Показать коллекции в текущей БД
+
+    show collections

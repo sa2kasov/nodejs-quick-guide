@@ -42,3 +42,4 @@ Node.js is an open source, cross-platform runtime environment for developing ser
    3. [App Configuration (nconf)](./7-creating-app/index.md#Конфигурация-приложения)
    4. [Logging (winston)](./7-creating-app/index.md#Логирование)
    5. [Using Template Engine (ejs-locals)](./7-creating-app/index.md#Шаблонизация-с-EJS)
+   6. [MongoDB](./7-creating-app/index.md#MongoDB)
