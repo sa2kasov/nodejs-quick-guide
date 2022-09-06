@@ -28,3 +28,4 @@ Thumbs.db
 /6-websockets/package-lock.json
 /7-creating-app/node_modules/
 /7-creating-app/package-lock.json
+/7-creating-app/mongod.lock
